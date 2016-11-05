@@ -1,0 +1,31 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "ZpmIsVbs9VRiZ8ZMwxxTPyW1ZpM=",
+			"path": "github.com/heppu/simple-cors",
+			"revision": "0fcde90b1493492935885d754ed54c4e4a402618",
+			"revisionTime": "2016-10-23T13:53:12Z"
+		},
+		{
+			"checksumSHA1": "ljZrmD7pmMXAkGNfp6IEzj31fY8=",
+			"path": "github.com/joho/godotenv",
+			"revision": "4ed13390c0acd2ff4e371e64d8b97c8954138243",
+			"revisionTime": "2015-09-07T01:02:28Z"
+		},
+		{
+			"checksumSHA1": "UE4lhbPYYWEhqHXQk24OA73m5+8=",
+			"path": "github.com/joho/godotenv/autoload",
+			"revision": "4ed13390c0acd2ff4e371e64d8b97c8954138243",
+			"revisionTime": "2015-09-07T01:02:28Z"
+		},
+		{
+			"checksumSHA1": "nsg4jxDgwdJQ31EhsGf297GcJ+M=",
+			"path": "github.com/ramin0/chatbot",
+			"revision": "cb64d3c5dc06d236d9955cc058b63f8bd2e85af0",
+			"revisionTime": "2016-11-05T11:40:51Z"
+		}
+	],
+	"rootPath": "github.com/ramin0/chatbot-sample"
+}
