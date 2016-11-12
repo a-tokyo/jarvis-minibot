@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 )
 
+// https://newsapi.org/#documentation docs link
+
 type Response struct{
 	status string
 	source string
