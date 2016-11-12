@@ -1,5 +1,5 @@
 /.env
 /.vscode/                                                                                                           
 /debug
-/vendor/*/
+/vendor/github.com/*/
 /tmp/
