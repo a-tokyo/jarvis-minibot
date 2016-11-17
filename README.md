@@ -6,6 +6,8 @@ The currently supported subjects are News and Weather.
 
 
 ### Go Installation -> Google search
+Visit <a href="https://golang.org/">https://golang.org/</a>
+
 ### Setup GOPATH
 run these two commands on the terminal
 ```
