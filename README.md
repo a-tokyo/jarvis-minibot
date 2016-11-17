@@ -1,19 +1,25 @@
 # Jarvis Mini-Bot
 
+## Description
+Jarvis minibot is a simple bot that uses natural language processing to analyze the users' question and respond with data about the subject from 3rd Party APIs.
+The currently supported subjects are News and Weather.
+
+
 ### Go Installation -> Google search
 ### Setup GOPATH
-run these two commands on the terminal 
+run these two commands on the terminal
 ```
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc 
+source ~/.bashrc
 ```
-*disclaimer: this is only tested on Ubuntu Linux*
-then run this 
+
+then run this
 go get github.com/kardianos/govendor
 go get github.com/pilu/fresh
-### Setup project 
+### Setup project
 - Clone project
-- `cd` to the project
-- `govendor sync` or `govendor install` not sure which one works :D
+- run `cd jarvis-minibot`
+- run `govendor sync`
 - `fresh` will start the server and listen to changes
-- If you want to run individual file just run `go nameoffile.go` in the terminal 
+- instead of fresh you can run `go run main.go`
+- If you want to run individual file just run `go nameoffile.go` in the terminal
