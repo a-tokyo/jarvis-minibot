@@ -1,4 +1,4 @@
-# Jarvis Mini-Bot
+# Jarvis Minibot
 
 ## Description
 Jarvis minibot is a simple bot that uses natural language processing to analyze the users' question and respond with data about the subject from 3rd Party APIs.
