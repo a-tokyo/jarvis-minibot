@@ -103,9 +103,27 @@ func GetArticles(source string) ([]article) {
 	return resp.Articles
 }
 
+/*
+This one should get the sources available on the api in other words the sources that we support,
+please note that all these variables are optional so you might get all of these as nulls
+and you can carry on with the request with no problem
+This function should return list of sources and error
+You should also handle if you recieve error so you should give me back the error so I can display it to the user
+*/
+func getSources(category string, lang string,country string){
+
+}
 
 //Weather API
-
+// TODO Modularize
+//Weather Datastructures
+//Weather Response, this structure is the struct form of the parsed weather API JSON response
+type weatherResponse struct{
+	weather []weatherDescription `json:"weather"`
+	main weatherData `json:"main"`
+	wind weatherWind `json:"wind"`
+	visibility float64 `json:"visibility"`
+}
 //Weather Data, this structure contains the main weather data
 type weatherData struct{
 	temp float64 `json:"temp"`
@@ -123,20 +141,17 @@ type weatherDescription struct{
 	icon string `json:"icon"`
 }
 
-/*
-This one should get the weather full state from openweathermap.org API.
-*/
-func GetWeather(source string) (string) {
-	return "TODO implement"
+//Weather Description, this structure contains the weather description in english. i.e: main:"Clouds" description: "Few Clouds"
+type weatherWind struct{
+	speed float32 `json:"speed"`
+	deg float32 `json:"deg"`
 }
 
 /*
-This one should get the sources available on the api in other words the sources that we support,
-please note that all these variables are optional so you might get all of these as nulls
-and you can carry on with the request with no problem
-This function should return list of sources and error
-You should also handle if you recieve error so you should give me back the error so I can display it to the user
+This one should get the weather full state from openweathermap.org API.
 */
-func getSources(category string, lang string,country string){
-
+func GetWeather(query string) (string) {
+	// resp := new(newsResponse) // or &Foo{}
+	// GetJSON("http://api.openweathermap.org/data/2.5/weather?q="+ query +"&appid=84c9e58ea74f56dfbffb9c5594fa45f5&units=metric", resp, nil)
+	return "TODO implement"
 }
