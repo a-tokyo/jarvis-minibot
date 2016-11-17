@@ -4,6 +4,7 @@
 Jarvis minibot is a simple bot that uses natural language processing to analyze the users' question and respond with data about the subject from 3rd Party APIs.
 The currently supported subjects are News and Weather.
 
+## Setup
 
 ### Go Installation
 Visit <a href="https://golang.org/">https://golang.org/</a>
