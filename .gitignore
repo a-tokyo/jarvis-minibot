@@ -1,5 +1,6 @@
 /.env
-/.vscode/                                                                                                           
+/.vscode/
 /debug
 /vendor/github.com/*/
 /tmp/
+.DS_Store
