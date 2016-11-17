@@ -103,6 +103,28 @@ func GetArticles(source string) ([]article) {
 	return resp.Articles
 }
 
+
+//Weather API
+
+type weatherData struct{
+	temp float64 `json:"temp"`
+	pressure float64 `json:"pressure"`
+	humidity float64 `json:"humidity"`
+	temp_min float64 `json:"temp_min"`
+	temp_max float64 `json:"temp_max"`
+}
+
+type weatherDescription struct{
+	id int32 `json:"temp"`
+	main string `json:"main"`
+	description string `json:"description"`
+	icon string `json:"icon"`
+}
+
+func GetWeather(source string) (string) {
+	return "TODO implement"
+}
+
 /*
 This one should get the sources available on the api in other words the sources that we support,
 please note that all these variables are optional so you might get all of these as nulls
