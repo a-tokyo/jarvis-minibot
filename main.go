@@ -19,7 +19,7 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 	newsSource := resp.Entities.Source[0].Value
 	data := GetArticles(newsSource)
 
-	return data[0].Title, nil
+	return `<div class="jarvis-response"`+data[0].Title+`</div>`, nil
 }
 
 func main() {
