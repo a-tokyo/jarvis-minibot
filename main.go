@@ -148,10 +148,18 @@ type weatherWind struct{
 }
 
 /*
+The query string is as follows: "cityName" or "cityName,countryInitials" i.e: "cairo" or "cairo,eg"
 This one should get the weather full state from openweathermap.org API.
+The GetJSON Func mutates the response defined in the first line and fills it with the data
+To know how to correctly get your neded values please check the 4 weather Data structures.
+The object has 2 levels, i.e myWeather.main.temp gives the temperature.
+If an error was thrown by the getJSON func, this error is returned as is preceded by a nil
 */
-func GetWeather(query string) (string) {
-	// resp := new(newsResponse) // or &Foo{}
-	// GetJSON("http://api.openweathermap.org/data/2.5/weather?q="+ query +"&appid=84c9e58ea74f56dfbffb9c5594fa45f5&units=metric", resp, nil)
-	return "TODO implement"
+func GetWeather(query string) (*weatherResponse, error) {
+	response := new(weatherResponse)
+	err := GetJSON("http://api.openweathermap.org/data/2.5/weather?q="+ query +"&appid=84c9e58ea74f56dfbffb9c5594fa45f5&units=metric", response, nil)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
 }
