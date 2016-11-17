@@ -106,6 +106,7 @@ func GetArticles(source string) ([]article) {
 
 //Weather API
 
+//Weather Data, this structure contains the main weather data
 type weatherData struct{
 	temp float64 `json:"temp"`
 	pressure float64 `json:"pressure"`
@@ -114,6 +115,7 @@ type weatherData struct{
 	temp_max float64 `json:"temp_max"`
 }
 
+//Weather Description, this structure contains the weather description in english. i.e: main:"Clouds" description: "Few Clouds"
 type weatherDescription struct{
 	id int32 `json:"temp"`
 	main string `json:"main"`
@@ -121,6 +123,9 @@ type weatherDescription struct{
 	icon string `json:"icon"`
 }
 
+/*
+This one should get the weather full state from openweathermap.org API.
+*/
 func GetWeather(source string) (string) {
 	return "TODO implement"
 }
