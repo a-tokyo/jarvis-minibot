@@ -117,6 +117,7 @@ func getSources(category string, lang string,country string){
 //Weather API
 // TODO Modularize
 //Weather Datastructures
+
 //Weather Response, this structure is the struct form of the parsed weather API JSON response
 type weatherResponse struct{
 	weather []weatherDescription `json:"weather"`
