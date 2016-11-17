@@ -5,7 +5,7 @@ Jarvis minibot is a simple bot that uses natural language processing to analyze 
 The currently supported subjects are News and Weather.
 
 
-### Go Installation -> Google search
+### Go Installation
 Visit <a href="https://golang.org/">https://golang.org/</a>
 
 ### Setup GOPATH
