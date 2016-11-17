@@ -23,7 +23,7 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 }
 
 func main() {
-	chatbot.WelcomeMessage = "What's your name?"
+	chatbot.WelcomeMessage = "What would you like to know about?"
 	chatbot.ProcessFunc(chatbotProcess)
 
 	port := os.Getenv("PORT")
