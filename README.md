@@ -3,6 +3,12 @@
 ## Description
 Jarvis minibot is a simple bot that uses natural language processing to analyze the users' question and respond with data about the subject from 3rd Party APIs.
 The currently supported subjects are News and Weather.
+> Deployment url: https://jarvis-minibot.herokuapp.com
+
+## Demo
+Go to: http://ramin0-chatbot-ui.herokuapp.com
+Paste the url https://jarvis-minibot.herokuapp.com in the url input field
+The chatbot is now ready to use.
 
 ## Setup
 
