@@ -50,6 +50,7 @@ func main() {
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 		background: rgba(255,255,255,0.8);
     	padding: 16px;		
+		border-radius: 6px;		
 		color: rgba(0,0,0,0.44);
 	">
 		<h3>What would you like to know about?</h3>
@@ -249,6 +250,7 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
 	background: rgba(255,255,255,0.8);
     padding: 16px;
 	max-width: 392px;
+	border-radius: 6px;
 	color: rgba(0,0,0,0.44);	
 ">
     <h2>Weather in ` + weatherState.Name + `</h2>
