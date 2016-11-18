@@ -269,11 +269,6 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
         <li><h6>Direction: ` + floatToFixed(weatherState.Wind.Deg) + `°</h6></li>
     </ul>
 </div>`
-
-
-	// return `<div class="jarvis-response" style="padding: 5px 0;"><img src="http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png">` + "The temperature is " + strconv.FormatFloat(weatherState.Main.Temp, 'f', 6, 64) + "°C" + " (min: " + strconv.FormatFloat(weatherState.Main.TempMin, 'f', 6, 64) + ", max: " + strconv.FormatFloat(weatherState.Main.TempMax, 'f', 6, 64) + "); preassure is " +
-	// strconv.FormatFloat(weatherState.Main.Pressure, 'f', 6, 64) + " with a wind speed of " + strconv.FormatFloat(weatherState.Wind.Speed, 'f', 6, 64) + "and a humidity rate: " +  strconv.FormatFloat(weatherState.Main.Humidity, 'f', 6, 64) + ". " + "Weather main highlight: " + weatherState.Weather[0].Main +
-	// ", " + weatherState.Weather[0].Description + "." + `</div>`
 }
 
 // ./END Weather API
