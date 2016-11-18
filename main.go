@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"log"
 	"os"
 	"github.com/ramin0/chatbot"
@@ -144,8 +145,8 @@ type weatherDescription struct{
 
 //Weather Description, this structure contains the weather description in english. i.e: main:"Clouds" description: "Few Clouds"
 type weatherWind struct{
-	speed float32 `json:"speed"`
-	deg float32 `json:"deg"`
+	speed float64 `json:"speed"`
+	deg float64 `json:"deg"`
 }
 
 /*
@@ -163,4 +164,12 @@ func GetWeather(query string) (*weatherResponse, error) {
 		return nil, err
 	}
 	return response, nil
+}
+/*
+This one takes a weatherResponse struct pointer and returns the weather data in an HTML string
+*/
+func WeatherToHTMLString(weatherState *weatherResponse) (string) {
+	return `<div class="jarvis-response" style="padding: 5px 0;"> ` + "The temperature is " + strconv.FormatFloat(weatherState.main.temp, 'f', 6, 64) + "°C" + " (min: " + strconv.FormatFloat(weatherState.main.temp_min, 'f', 6, 64) + ", max: " + strconv.FormatFloat(weatherState.main.temp_max, 'f', 6, 64) + "); preassure is " +
+	strconv.FormatFloat(weatherState.main.pressure, 'f', 6, 64) + " with a wind speed of " + strconv.FormatFloat(weatherState.wind.speed, 'f', 6, 64) + "and a humidity rate: " +  strconv.FormatFloat(weatherState.main.humidity, 'f', 6, 64) + ". "
+	// + "Weather main highlight: " + weatherState.weather[0].main + ", " + weatherState.weather[0].description + "." + ` </div>`
 }
