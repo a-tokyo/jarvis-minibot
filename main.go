@@ -42,6 +42,7 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 	return errorMessage, nil
 }
 
+
 func main() {
 	chatbot.WelcomeMessage = `
 	<div style="
