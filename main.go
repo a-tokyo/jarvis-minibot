@@ -9,6 +9,7 @@ import (
 	"strings"
 	"net/http"
 	"errors"
+	"os"
 )
 	// "os"
 // Autoload environment variables in .env
@@ -60,7 +61,12 @@ func main() {
 	</div>
 	`
 	chatbot.ProcessFunc(chatbotProcess)
-
+	
+	port := os.Getenv("PORT")
+	// Default to 3000 if no PORT environment variable was defined
+	if port == "" {
+		port = "3000"
+	}
 	// Start the server
 	fmt.Printf("Listening on port %s...\n", port)
 	log.Fatalln(chatbot.Engage(":" + port))
