@@ -115,7 +115,8 @@ func getSources(category string, lang string,country string){
 
 }
 
-//Weather API
+// Weather API
+
 // TODO Modularize
 /*
 How to deal with this piece of code ?
@@ -184,3 +185,5 @@ func WeatherToHTMLString(weatherState *weatherResponse) (string) {
 	strconv.FormatFloat(weatherState.main.pressure, 'f', 6, 64) + " with a wind speed of " + strconv.FormatFloat(weatherState.wind.speed, 'f', 6, 64) + "and a humidity rate: " +  strconv.FormatFloat(weatherState.main.humidity, 'f', 6, 64) + ". " + "Weather main highlight: " + weatherState.weather[0].main +
 	", " + weatherState.weather[0].description + "." + `</div>`
 }
+
+// ./END Weather API
