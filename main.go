@@ -117,6 +117,15 @@ func getSources(category string, lang string,country string){
 
 //Weather API
 // TODO Modularize
+/*
+How to deal with this piece of code ?
+If wIT returns weather as an entinty, get the city* and the country abbr.(optional).
+Call GetWeather("city,countryInitials") or GetWeather("city"); this returns a weatherResponse structure,
+let's call this weatherResponse struct weatherState.
+Call WeatherToHTMLString(weatherState), this returns an HTML div in a string containing
+the weather information in english language.
+*/
+
 //Weather Datastructures
 
 //Weather Response, this structure is the struct form of the parsed weather API JSON response
