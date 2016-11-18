@@ -7,7 +7,7 @@ The currently supported subjects are News and Weather.
 ## Setup
 
 ### Go Installation
-Visit <a href="https://golang.org/">https://golang.org/</a>
+Visit <a href="https://golang.org">https://golang.org</a>
 
 ### Setup GOPATH
 run these two commands on the terminal
@@ -15,7 +15,6 @@ run these two commands on the terminal
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
-
 then run this
 go get github.com/kardianos/govendor
 go get github.com/pilu/fresh
@@ -26,3 +25,10 @@ go get github.com/pilu/fresh
 - `fresh` will start the server and listen to changes
 - instead of fresh you can run `go run main.go`
 - If you want to run individual file just run `go nameoffile.go` in the terminal
+
+## Contribution
+
+- Currently we need to add more 3rd party APIs to the bot.
+  > Once you implement the API communication code, adjust the bot to reply about specific entities with this API's response.
+
+- Also we need to modularize the current APIs into seperate files and packages.
