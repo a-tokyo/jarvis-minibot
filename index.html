@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jarvis-minibot by A-Tokyo</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Jarvis-minibot</h1>
+        <p>A simple golang bot that uses natural language processing to analyze the users&#39; question and respond with data about the subject from 3rd Party APIs.</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/A-Tokyo/jarvis-minibot" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/A-Tokyo/jarvis-minibot/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/A-Tokyo/jarvis-minibot/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="jarvis-minibot" class="anchor" href="#jarvis-minibot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jarvis Minibot</h1>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h2>
+
+<p>Jarvis minibot is a simple bot that uses natural language processing to analyze the users' question and respond with data about the subject from 3rd Party APIs.
+The currently supported subjects are News and Weather.</p>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setup</h2>
+
+<h3>
+<a id="go-installation" class="anchor" href="#go-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Installation</h3>
+
+<p>Visit <a href="https://golang.org"></a><a href="https://golang.org">https://golang.org</a></p>
+
+<h3>
+<a id="setup-gopath" class="anchor" href="#setup-gopath" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setup GOPATH</h3>
+
+<p>run these two commands on the terminal</p>
+
+<pre><code>echo "export PATH=$GOPATH/bin:$PATH" &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<p>then run this
+go get github.com/kardianos/govendor
+go get github.com/pilu/fresh</p>
+
+<h3>
+<a id="setup-project" class="anchor" href="#setup-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setup project</h3>
+
+<ul>
+<li>Clone project</li>
+<li>run <code>cd jarvis-minibot</code>
+</li>
+<li>run <code>govendor sync</code>
+</li>
+<li>
+<code>fresh</code> will start the server and listen to changes</li>
+<li>instead of fresh you can run <code>go run main.go</code>
+</li>
+<li>If you want to run individual file just run <code>go nameoffile.go</code> in the terminal</li>
+</ul>
+
+<h2>
+<a id="contribution" class="anchor" href="#contribution" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contribution</h2>
+
+<ul>
+<li>
+<p>Currently we need to add more 3rd party APIs to the bot.</p>
+
+<blockquote>
+<p>Once you implement the API communication code, adjust the bot to reply about specific entities with this API's response.</p>
+</blockquote>
+</li>
+<li><p>Also we need to modularize the current APIs into seperate files and packages.</p></li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/A-Tokyo">A-Tokyo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
