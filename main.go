@@ -30,14 +30,14 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 		data, error := getWeather(value)
 		if error != nil {
 			return "",error
-		}	
+		}
 		return weatherToHTMLString(data), nil
-	case "news": 
+	case "news":
 		data, error := getArticles(strings.ToLower(value))
 		if error != nil {
 			return "",error
-		}	 
-		return articlesToHTMLString(data)	
+		}
+		return articlesToHTMLString(data)
 	}
 	return errorMessage, nil
 }
@@ -48,8 +48,8 @@ func main() {
 	<div style="
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 		background: rgba(255,255,255,0.8);
-    	padding: 16px;		
-		border-radius: 6px;		
+    	padding: 16px;
+		border-radius: 6px;
 		color: rgba(0,0,0,0.44);
 	">
 		<h3>What would you like to know about?</h3>
@@ -61,7 +61,7 @@ func main() {
 	</div>
 	`
 	chatbot.ProcessFunc(chatbotProcess)
-	
+
 	port := os.Getenv("PORT")
 	// Default to 3000 if no PORT environment variable was defined
 	if port == "" {
@@ -155,11 +155,11 @@ func getArticles(source string) (*newsResponse, error) {
 
 func articlesToHTMLString(newsResponse *newsResponse) (string, error){
 	if(strings.EqualFold("error", newsResponse.Status)){
-		return "", errors.New(newsResponse.Message) 
+		return "", errors.New(newsResponse.Message)
 	}
 	htmlString := `<ul style="list-style: none">`
 	for _,article := range newsResponse.Articles {
-		htmlString = htmlString + 
+		htmlString = htmlString +
 		`<li
 			style="
 				background: rgba(0,0,0,0.05);
@@ -170,8 +170,8 @@ func articlesToHTMLString(newsResponse *newsResponse) (string, error){
 				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 				background: rgba(255,255,255,0.8);"
 		> <a style="text-decoration: none;" href=" ` + article.URL + `">
-		<h3 style="color: rgba(0,0,0,0.5);">` + 
-		article.Title + "</h3>" + 
+		<h3 style="color: rgba(0,0,0,0.5);">` +
+		article.Title + "</h3>" +
 		`<h5 style="color: rgba(0,0,0,0.4);">` + article.Description + `</h5><li>`
 	}
 	htmlString += "</ul>"
@@ -250,7 +250,7 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
     padding: 16px;
 	max-width: 392px;
 	border-radius: 6px;
-	color: rgba(0,0,0,0.44);	
+	color: rgba(0,0,0,0.44);
 ">
     <h2>Weather in ` + weatherState.Name + `</h2>
     <img style="
@@ -262,6 +262,11 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
     <ul style="list-style= none;">
         <li><h6>Min: ` + floatToFixed(weatherState.Main.TempMin) + `°C</h6></li>
         <li><h6>Max: ` + floatToFixed(weatherState.Main.TempMax) + `°C</h6></li>
+    </ul>
+		<h4>Wind status: </h4>
+		<ul style="list-style= none;">
+        <li><h6>Speed: ` + floatToFixed(weatherState.Wind.Speed) + `m/s</h6></li>
+        <li><h6>Direction: ` + floatToFixed(weatherState.Wind.Deg) + `°</h6></li>
     </ul>
 </div>`
 
