@@ -1,4 +1,0 @@
-// package langprocessor
-// import (
-//     "getJson"
-// )

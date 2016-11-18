@@ -1,6 +1,0 @@
-// package newsapi
-//
-// import (
-// 	"getJson"
-// )
-//
