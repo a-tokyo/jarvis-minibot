@@ -38,3 +38,8 @@ go get github.com/pilu/fresh
   > Once you implement the API communication code, adjust the bot to reply about specific entities with this API's response.
 
 - Also we need to modularize the current APIs into seperate files and packages.
+
+## APIs utilised
+- Language processor: https://api.wit.ai
+- News: https://newsapi.org
+- Weather: https://openweathermap.org
