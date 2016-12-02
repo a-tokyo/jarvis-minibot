@@ -333,6 +333,7 @@ func weatherToJSONString(weatherState *weatherResponse) (string) {
 
 // ./END Weather API
 
+// Utilities Functions
 
 func floatToFixed(num float64) string {
 	intNum := int(num)
