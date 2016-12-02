@@ -21,6 +21,7 @@ const port = "3000"
 const errorMessage = "I'm embarrassed! \n Sorry, I can't answer this question :("
 
 func chatbotProcess(session chatbot.Session, message string) (string, error) {
+	isMobile := strings.HasPrefix(message, "mobileSession/")
 	intent, value, err := extractValues(message)
 	if err != nil {
 		return "",err
@@ -31,13 +32,17 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 		if error != nil {
 			return "",error
 		}
-		return weatherToHTMLString(data), nil
+		if !isMobile {
+			return weatherToHTMLString(data), nil
+		}
 	case "news":
 		data, error := getArticles(strings.ToLower(value))
 		if error != nil {
 			return "",error
 		}
-		return articlesToHTMLString(data)
+		if !isMobile {
+			return articlesToHTMLString(data)
+		}
 	}
 	return errorMessage, nil
 }
