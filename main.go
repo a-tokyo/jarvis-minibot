@@ -34,6 +34,8 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 		}
 		if !isMobile {
 			return weatherToHTMLString(data), nil
+		}else{
+			return weatherToJSONString(data), nil
 		}
 	case "news":
 		data, error := getArticles(strings.ToLower(value))
