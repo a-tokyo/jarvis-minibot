@@ -276,6 +276,17 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
 </div>`
 }
 
+func weatherToJSONString(weatherState *weatherResponse) (string) {
+	return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
+	temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
+	weatherState: "` + weatherState.Weather[0].Main + `",
+	weatherDescription: "` + weatherState.Weather[0].Description + `",
+	minTemprature: "` + floatToFixed(weatherState.Main.TempMin) + `°C",
+	maxTemprature: "` + floatToFixed(weatherState.Main.TempMax) + `°C",
+	windSpeed ": ` + floatToFixed(weatherState.Wind.Speed) + `m/s",
+	windDirection: "` + floatToFixed(weatherState.Wind.Deg) + `"}`
+}
+
 // ./END Weather API
 
 
