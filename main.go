@@ -305,6 +305,21 @@ func weatherToHTMLString(weatherState *weatherResponse) (string) {
 </div>`
 }
 
+/*
+This one takes a weatherResponse pointer and returns a JSON string representing the weather
+i.e:
+{
+	icon: "url.png",
+	temprature: "3°C",
+	weatherState: "clouds",
+	weatherDescription: "few clouds",
+	minTemprature: "3°C",
+	maxTemprature: "3°C",
+	windSpeed: "6 m/s",
+	windDirection: "south west"
+}
+*/
+
 func weatherToJSONString(weatherState *weatherResponse) (string) {
 	return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
 	temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
