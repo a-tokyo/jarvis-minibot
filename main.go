@@ -44,6 +44,8 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 		}
 		if !isMobile {
 			return articlesToHTMLString(data)
+		}else{
+			return articlesToJSONString(data)
 		}
 	}
 	return errorMessage, nil
