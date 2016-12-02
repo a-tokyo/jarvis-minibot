@@ -187,6 +187,15 @@ func articlesToHTMLString(newsResponse *newsResponse) (string, error){
 	return htmlString, nil
 }
 
+/*
+This one takes a newsResponse pointer and returns a JSON string of Articles in JSON format
+i.e:
+{
+	article_1: {url: "url", title: "title", "description: "description"},
+	article_1: {url: "url", title: "title", "description: "description"}
+}
+*/
+
 func articlesToJSONString(newsResponse *newsResponse) (string, error){
 	if(strings.EqualFold("error", newsResponse.Status)){
 		return "", errors.New(newsResponse.Message)
