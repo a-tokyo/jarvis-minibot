@@ -184,6 +184,22 @@ func articlesToHTMLString(newsResponse *newsResponse) (string, error){
 	htmlString += "</ul>"
 	return htmlString, nil
 }
+
+func articlesToJSONString(newsResponse *newsResponse) (string, error){
+	if(strings.EqualFold("error", newsResponse.Status)){
+		return "", errors.New(newsResponse.Message)
+	}
+	jsonString := `{`
+	for i,article := range newsResponse.Articles {
+		jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
+		`{url: "` + article.URL + `", ` +
+		`title: "` + article.Title + `", ` +
+		`description: "` + article.Description + `"},`
+	}
+	jsonString += `}`
+	return jsonString, nil
+}
+
 // Weather API
 
 // TODO Modularize
