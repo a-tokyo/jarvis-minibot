@@ -207,7 +207,7 @@ func articlesToJSONString(newsResponse *newsResponse) (string, error) {
 	jsonString := ``
 	for _, article := range newsResponse.Articles {
 		jsonString += "Article Title: " + article.Title
-		jsonString += "\nArticle Description" + article.Description + "\n"
+		jsonString += "\nArticle Description" + article.Description + "\n \n \n"
 
 		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
 		// `{url: "` + article.URL + `", ` +
