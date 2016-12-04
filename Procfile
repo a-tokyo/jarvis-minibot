@@ -1,1 +1,1 @@
-web: chatbot-sample
+web: jarvis-minibot
