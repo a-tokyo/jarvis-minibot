@@ -23,22 +23,27 @@ const port = "3000"
 const errorMessage = "I'm embarrassed! \n Sorry, I can't answer this question :("
 
 func main() {
-	chatbot.WelcomeMessage = `
-	<div style="
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-		background: rgba(255,255,255,0.8);
-	  	padding: 16px;
-		border-radius: 6px;
-		color: rgba(0,0,0,0.44);
-	">
-		<h3>What would you like to know about?</h3>
-		<h5>I can asnwer questions about</h5>
-		<ul style="list-style: none;">
-			<li><h5>Weather: <blockquote>Give me the weather in Cairo?</blockquote></h5></li>
-			<li><h5>News: <blockquote>What is the news in Techcrunch?</blockquote></h5></li>
-		</ul>
-	</div>
-	`
+	chatbot.WelcomeMessage = `What would you like to know about?
+	 I can answer questions about:
+		Weather: Give me the weather in Cairo
+		News: What is the news in techcrunch?
+	  `
+	// chatbot.WelcomeMessage = `
+	// <div style="
+	// 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	// 	background: rgba(255,255,255,0.8);
+	//   	padding: 16px;
+	// 	border-radius: 6px;
+	// 	color: rgba(0,0,0,0.44);
+	// ">
+	// 	<h3>What would you like to know about?</h3>
+	// 	<h5>I can asnwer questions about</h5>
+	// 	<ul style="list-style: none;">
+	// 		<li><h5>Weather: <blockquote>Give me the weather in Cairo?</blockquote></h5></li>
+	// 		<li><h5>News: <blockquote>What is the news in Techcrunch?</blockquote></h5></li>
+	// 	</ul>
+	// </div>
+	// `
 	chatbot.ProcessFunc(chatbotProcess)
 
 	port := os.Getenv("PORT")
