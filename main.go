@@ -1,16 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"strconv"
-	"log"
-	"github.com/ramin0/chatbot"
 	"encoding/json"
-	"strings"
-	"net/http"
 	"errors"
+	"fmt"
+	"log"
+	"net/http"
 	"os"
+	"strconv"
+	"strings"
+
+	"github.com/ramin0/chatbot"
 )
+
 // Autoload environment variables in .env
 import _ "github.com/joho/godotenv/autoload"
 
@@ -53,123 +55,119 @@ func chatbotProcess(session chatbot.Session, message string) (string, error) {
 	isMobile := strings.HasPrefix(message, "mobileSession/")
 	intent, value, err := extractValues(message)
 	if err != nil {
-		return "",err
+		return "", err
 	}
 	switch intent {
 	case "weather":
 		data, error := getWeather(value)
 		if error != nil {
-			return "",error
+			return "", error
 		}
 		if !isMobile {
 			return weatherToHTMLString(data), nil
-		}else{
+		} else {
 			return weatherToJSONString(data), nil
 		}
 	case "news":
 		data, error := getArticles(strings.ToLower(value))
 		if error != nil {
-			return "",error
+			return "", error
 		}
 		if !isMobile {
 			return articlesToHTMLString(data)
-		}else{
+		} else {
 			return articlesToJSONString(data)
 		}
 	}
 	return errorMessage, nil
 }
 
+func getJSON(url string, target interface{}, headers map[string]string) error {
+	client := &http.Client{}
 
-func getJSON(url string, target interface{},headers map[string]string) error {
-    client := &http.Client{}
+	url = strings.Replace(url, " ", "+", -1)
+	req, err := http.NewRequest("GET", url, nil)
 
-    url = strings.Replace(url, " ", "+", -1)
-    req, err := http.NewRequest("GET", url, nil)
+	for key, value := range headers {
+		req.Header.Add(key, value)
+	}
+	resp, err := client.Do(req)
 
-    for key, value := range headers {
-        req.Header.Add(key,value)
-    }
-    resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
 
-    if err != nil {
-        return err
-    }
-    defer resp.Body.Close()
-
-    return json.NewDecoder(resp.Body).Decode(target)
+	return json.NewDecoder(resp.Body).Decode(target)
 }
 
-type wITResponse struct{
-    Entities entity `json:"entities"`
-    MsgID string `json:"msg_id"`
-    Text string `json:"_text"`
+type wITResponse struct {
+	Entities entity `json:"entities"`
+	MsgID    string `json:"msg_id"`
+	Text     string `json:"_text"`
 }
-type entity struct{
-    Source []source `json:"source"`
+type entity struct {
+	Source []source `json:"source"`
 	Intent []intent `json:"intent"`
 }
-type intent struct{
+type intent struct {
 	Confidence float64 `json:"confidence"`
-	Type string `json:"confidence"`
-	Value string `json:"value"`
+	Type       string  `json:"confidence"`
+	Value      string  `json:"value"`
 }
 
-type source struct{
-    Confidence float64 `json:"confidence"`
-    Type string `json:"type"`
-    Value string `json:"value"`
-    Suggested bool `json:"suggested"`
+type source struct {
+	Confidence float64 `json:"confidence"`
+	Type       string  `json:"type"`
+	Value      string  `json:"value"`
+	Suggested  bool    `json:"suggested"`
 }
 
-func extractValues(message string) (string, string, error){
-    resp := new(wITResponse)
-    headers := map[string]string{"Authorization": witAPIKey}
-    err := getJSON("https://api.wit.ai/message?v=20161114&q=" + message, resp, headers)
-	if err != nil{
-		return "","",err
+func extractValues(message string) (string, string, error) {
+	resp := new(wITResponse)
+	headers := map[string]string{"Authorization": witAPIKey}
+	err := getJSON("https://api.wit.ai/message?v=20161114&q="+message, resp, headers)
+	if err != nil {
+		return "", "", err
 	}
 
 	if len(resp.Entities.Intent) == 0 || len(resp.Entities.Source) == 0 {
-		return "","",errors.New(errorMessage)
+		return "", "", errors.New(errorMessage)
 	}
-    return resp.Entities.Intent[0].Value, resp.Entities.Source[0].Value, nil
+	return resp.Entities.Intent[0].Value, resp.Entities.Source[0].Value, nil
 }
 
-
-
-type newsResponse struct{
-	Status string `json:"status"`
-	Source string `json:"source"`
-	SortBy string `json:"sortBy"`
+type newsResponse struct {
+	Status   string    `json:"status"`
+	Source   string    `json:"source"`
+	SortBy   string    `json:"sortBy"`
 	Articles []article `json:"articles"`
-	Message string `json:"message"`
+	Message  string    `json:"message"`
 }
 
-type article struct{
-	Author string `json:"author"`
-	Title string `json:"title"`
+type article struct {
+	Author      string `json:"author"`
+	Title       string `json:"title"`
 	Description string `json:"description"`
-	URL string `json:"url"`
-	URLToImage string `json:"urlToImage"`
+	URL         string `json:"url"`
+	URLToImage  string `json:"urlToImage"`
 	PublishedAt string `json:"publishedAt"`
 }
 
-
 func getArticles(source string) (*newsResponse, error) {
 	resp := new(newsResponse) // or &Foo{}
-	err := getJSON("https://newsapi.org/v1/articles?source="+source+"&apiKey=" + newsAPIKey, resp, nil)
+	err := getJSON("https://newsapi.org/v1/articles?source="+source+"&apiKey="+newsAPIKey, resp, nil)
 	return resp, err
 }
 
-func articlesToHTMLString(newsResponse *newsResponse) (string, error){
-	if(strings.EqualFold("error", newsResponse.Status)){
+func articlesToHTMLString(newsResponse *newsResponse) (string, error) {
+	if strings.EqualFold("error", newsResponse.Status) {
 		return "", errors.New(newsResponse.Message)
 	}
 	htmlString := `<ul style="list-style: none">`
-	for _,article := range newsResponse.Articles {
+	for _, article := range newsResponse.Articles {
 		htmlString = htmlString +
-		`<li
+			`<li
 			style="
 				background: rgba(0,0,0,0.05);
 				padding: 5px 10px;
@@ -180,8 +178,8 @@ func articlesToHTMLString(newsResponse *newsResponse) (string, error){
 				background: rgba(255,255,255,0.8);"
 		> <a style="text-decoration: none;" href=" ` + article.URL + `">
 		<h3 style="color: rgba(0,0,0,0.5);">` +
-		article.Title + "</h3>" +
-		`<h5 style="color: rgba(0,0,0,0.4);">` + article.Description + `</h5><li>`
+			article.Title + "</h3>" +
+			`<h5 style="color: rgba(0,0,0,0.4);">` + article.Description + `</h5><li>`
 	}
 	htmlString += "</ul>"
 	return htmlString, nil
@@ -196,21 +194,23 @@ i.e:
 }
 */
 
-func articlesToJSONString(newsResponse *newsResponse) (string, error){
-	if(strings.EqualFold("error", newsResponse.Status)){
+func articlesToJSONString(newsResponse *newsResponse) (string, error) {
+	if strings.EqualFold("error", newsResponse.Status) {
 		return "", errors.New(newsResponse.Message)
 	}
-	jsonString := `{`
-	for i,article := range newsResponse.Articles {
-		jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
-		`{url: "` + article.URL + `", ` +
-		`title: "` + article.Title + `", ` +
-		`description: "` + article.Description + `"}`
-		if i != len(newsResponse.Articles)-1 {
-			jsonString+= `,`
-		}
+	jsonString := ``
+	for _, article := range newsResponse.Articles {
+		jsonString += "Article Title: " + article.Title
+		jsonString += "\nArticle Description" + article.Description + "\n"
+
+		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
+		// `{url: "` + article.URL + `", ` +
+		// `title: "` + article.Title + `", ` +
+		// `description: "` + article.Description + `"}`
+		// if i != len(newsResponse.Articles)-1 {
+		// 	jsonString+= `,`
+		// }
 	}
-	jsonString += `}`
 	return jsonString, nil
 }
 
@@ -229,33 +229,34 @@ the weather information in english language.
 //Weather Datastructures
 
 //Weather Response, this structure is the struct form of the parsed weather API JSON response
-type weatherResponse struct{
+type weatherResponse struct {
 	Weather []WeatherDescription `json:"weather"`
-	Main WeatherData `json:"main"`
-	Wind WeatherWind `json:"wind"`
-	Name string `json:"name"`
+	Main    WeatherData          `json:"main"`
+	Wind    WeatherWind          `json:"wind"`
+	Name    string               `json:"name"`
 }
+
 //Weather Data, this structure contains the main weather data
-type WeatherData struct{
-	Temp float64 `json:"temp"`
+type WeatherData struct {
+	Temp     float64 `json:"temp"`
 	Pressure float64 `json:"pressure"`
 	Humidity float64 `json:"humidity"`
-	TempMin float64 `json:"temp_min"`
-	TempMax float64 `json:"temp_max"`
+	TempMin  float64 `json:"temp_min"`
+	TempMax  float64 `json:"temp_max"`
 }
 
 //Weather Description, this structure contains the weather description in english. i.e: main:"Clouds" description: "Few Clouds"
-type WeatherDescription struct{
-	ID int32 `json:"temp"`
-	Main string `json:"main"`
+type WeatherDescription struct {
+	ID          int32  `json:"temp"`
+	Main        string `json:"main"`
 	Description string `json:"description"`
-	Icon string `json:"icon"`
+	Icon        string `json:"icon"`
 }
 
 //Weather Description, this structure contains the weather description in english. i.e: main:"Clouds" description: "Few Clouds"
-type WeatherWind struct{
+type WeatherWind struct {
 	Speed float64 `json:"speed"`
-	Deg float64 `json:"deg"`
+	Deg   float64 `json:"deg"`
 }
 
 /*
@@ -268,7 +269,7 @@ If an error was thrown by the getJSON func, this error is returned as is precede
 */
 func getWeather(query string) (*weatherResponse, error) {
 	response := new(weatherResponse)
-	err := getJSON("http://api.openweathermap.org/data/2.5/weather?q="+ query +"&appid=" + weatherAPIKey + "&units=metric", response, nil)
+	err := getJSON("http://api.openweathermap.org/data/2.5/weather?q="+query+"&appid="+weatherAPIKey+"&units=metric", response, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +281,7 @@ func getWeather(query string) (*weatherResponse, error) {
 This one takes a weatherResponse struct pointer and returns the weather data in an HTML string.
 The returned string should be injected to the bot as the reply.
 */
-func weatherToHTMLString(weatherState *weatherResponse) (string) {
+func weatherToHTMLString(weatherState *weatherResponse) string {
 	return `<div style="
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	background: rgba(255,255,255,0.8);
@@ -323,15 +324,16 @@ i.e:
 }
 */
 
-func weatherToJSONString(weatherState *weatherResponse) (string) {
-	return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
-	temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
-	weatherState: "` + weatherState.Weather[0].Main + `",
-	weatherDescription: "` + weatherState.Weather[0].Description + `",
-	minTemprature: "` + floatToFixed(weatherState.Main.TempMin) + `°C",
-	maxTemprature: "` + floatToFixed(weatherState.Main.TempMax) + `°C",
-	windSpeed ": ` + floatToFixed(weatherState.Wind.Speed) + `m/s",
-	windDirection: "` + floatToFixed(weatherState.Wind.Deg) + `"}`
+func weatherToJSONString(weatherState *weatherResponse) string {
+	return "The weather in " + weatherState.Name + " is " + floatToFixed(weatherState.Main.Temp) + "°C \n"
+	// return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
+	// temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
+	// weatherState: "` + weatherState.Weather[0].Main + `",
+	// weatherDescription: "` + weatherState.Weather[0].Description + `",
+	// minTemprature: "` + floatToFixed(weatherState.Main.TempMin) + `°C",
+	// maxTemprature: "` + floatToFixed(weatherState.Main.TempMax) + `°C",
+	// windSpeed ": ` + floatToFixed(weatherState.Wind.Speed) + `m/s",
+	// windDirection: "` + floatToFixed(weatherState.Wind.Deg) + `"}`
 }
 
 // ./END Weather API
