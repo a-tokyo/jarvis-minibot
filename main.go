@@ -25,9 +25,9 @@ const errorMessage = "I'm embarrassed! \n Sorry, I can't answer this question :(
 func main() {
 
 	chatbot.WelcomeMessage = `What would you like to know about?
-	 I can answer questions about:
-		Weather: Give me the weather in Cairo
-		News: What is the news in techcrunch?
+I can answer questions about:
+Weather: Give me the weather in Cairo
+News: What is the news in techcrunch?
 	  `
 	// chatbot.WelcomeMessage = `
 	// <div style="
@@ -206,16 +206,18 @@ func articlesToJSONString(newsResponse *newsResponse) (string, error) {
 	}
 	jsonString := ``
 	for i, article := range newsResponse.Articles {
-		// jsonString += "Article Title: " + article.Title
-		// jsonString += "\nArticle Description" + article.Description + "\n \n \n"
-
-		jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
-			`{url: "` + article.URL + `", ` +
-			`title: "` + article.Title + `", ` +
-			`description: "` + article.Description + `"}`
+		jsonString += "Article Title: " + article.Title
+		jsonString += "\nArticle Description" + article.Description
 		if i != len(newsResponse.Articles)-1 {
-			jsonString += `,`
+			jsonString += +"\n \n"
 		}
+		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
+		// 	`{url: "` + article.URL + `", ` +
+		// 	`title: "` + article.Title + `", ` +
+		// 	`description: "` + article.Description + `"}`
+		// if i != len(newsResponse.Articles)-1 {
+		// 	jsonString += `,`
+		// }
 	}
 	return jsonString, nil
 }
@@ -331,7 +333,9 @@ i.e:
 */
 
 func weatherToJSONString(weatherState *weatherResponse) string {
-	return "The weather in " + weatherState.Name + " is " + floatToFixed(weatherState.Main.Temp) + "°C \n"
+	return "The weather in " + weatherState.Name + " is " + floatToFixed(weatherState.Main.Temp) + "°C " +
+		"with min temprature of " + floatToFixed(weatherState.Main.TempMin) + "°C " +
+		"and max temprature of " + floatToFixed(weatherState.Main.TempMax) + "°C"
 	// return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
 	// temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
 	// weatherState: "` + weatherState.Weather[0].Main + `",
