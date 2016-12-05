@@ -205,17 +205,17 @@ func articlesToJSONString(newsResponse *newsResponse) (string, error) {
 		return "", errors.New(newsResponse.Message)
 	}
 	jsonString := ``
-	for _, article := range newsResponse.Articles {
-		jsonString += "Article Title: " + article.Title
-		jsonString += "\nArticle Description" + article.Description + "\n \n \n"
+	for i, article := range newsResponse.Articles {
+		// jsonString += "Article Title: " + article.Title
+		// jsonString += "\nArticle Description" + article.Description + "\n \n \n"
 
-		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
-		// `{url: "` + article.URL + `", ` +
-		// `title: "` + article.Title + `", ` +
-		// `description: "` + article.Description + `"}`
-		// if i != len(newsResponse.Articles)-1 {
-		// 	jsonString+= `,`
-		// }
+		jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
+			`{url: "` + article.URL + `", ` +
+			`title: "` + article.Title + `", ` +
+			`description: "` + article.Description + `"}`
+		if i != len(newsResponse.Articles)-1 {
+			jsonString += `,`
+		}
 	}
 	return jsonString, nil
 }
