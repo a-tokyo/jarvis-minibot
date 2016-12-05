@@ -27,8 +27,7 @@ func main() {
 	chatbot.WelcomeMessage = `What would you like to know about?
 I can answer questions about:
 Weather: Give me the weather in Cairo
-News: What is the news in techcrunch?
-	  `
+News: What is the news in techcrunch?`
 	// chatbot.WelcomeMessage = `
 	// <div style="
 	// 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -206,18 +205,11 @@ func articlesToJSONString(newsResponse *newsResponse) (string, error) {
 	}
 	jsonString := ``
 	for i, article := range newsResponse.Articles {
-		jsonString += "Article Title: " + article.Title
-		jsonString += "\nArticle Description" + article.Description
+		jsonString += "Article Title: " + article.Title + "\n"
+		jsonString += "Article Description: " + article.Description
 		if i != len(newsResponse.Articles)-1 {
 			jsonString += "\n \n"
 		}
-		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
-		// 	`{url: "` + article.URL + `", ` +
-		// 	`title: "` + article.Title + `", ` +
-		// 	`description: "` + article.Description + `"}`
-		// if i != len(newsResponse.Articles)-1 {
-		// 	jsonString += `,`
-		// }
 	}
 	return jsonString, nil
 }
@@ -336,14 +328,6 @@ func weatherToJSONString(weatherState *weatherResponse) string {
 	return "The weather in " + weatherState.Name + " is " + floatToFixed(weatherState.Main.Temp) + "°C " +
 		"with min temprature of " + floatToFixed(weatherState.Main.TempMin) + "°C " +
 		"and max temprature of " + floatToFixed(weatherState.Main.TempMax) + "°C"
-	// return `{icon: "http://openweathermap.org/img/w/` + weatherState.Weather[0].Icon + `.png",
-	// temprature: "` + floatToFixed(weatherState.Main.Temp) + `°C",
-	// weatherState: "` + weatherState.Weather[0].Main + `",
-	// weatherDescription: "` + weatherState.Weather[0].Description + `",
-	// minTemprature: "` + floatToFixed(weatherState.Main.TempMin) + `°C",
-	// maxTemprature: "` + floatToFixed(weatherState.Main.TempMax) + `°C",
-	// windSpeed ": ` + floatToFixed(weatherState.Wind.Speed) + `m/s",
-	// windDirection: "` + floatToFixed(weatherState.Wind.Deg) + `"}`
 }
 
 // ./END Weather API
