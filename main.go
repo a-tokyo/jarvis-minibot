@@ -209,7 +209,7 @@ func articlesToJSONString(newsResponse *newsResponse) (string, error) {
 		jsonString += "Article Title: " + article.Title
 		jsonString += "\nArticle Description" + article.Description
 		if i != len(newsResponse.Articles)-1 {
-			jsonString += +"\n \n"
+			jsonString += "\n \n"
 		}
 		// jsonString = jsonString + `article_` + strconv.Itoa(i) + `: ` +
 		// 	`{url: "` + article.URL + `", ` +
